@@ -67,5 +67,8 @@ public class MainActivity extends AppCompatActivity {
                 (TextView) findViewById(R.id.message_text_view);
 
         messageTextView.setText(greeting);
+
+        // Enable reverse button
+        findViewById(R.id.reverse_button).setEnabled(true);
     }
 }
