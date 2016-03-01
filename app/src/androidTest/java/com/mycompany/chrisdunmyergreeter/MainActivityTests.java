@@ -4,6 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActivity> {
 
@@ -37,5 +38,12 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
                 (Button) activity.findViewById(R.id.greet_button);
 
         TouchUtils.clickView(this, greetButton);
+
+        // validate name shows up in TextView
+        TextView greetMessage =
+                (TextView) activity.findViewById(R.id.message_text_view);
+
+        String actualText = greetMessage.getText().toString();
+        assertEquals("Hello, Jake!", actualText);
     }
 }
