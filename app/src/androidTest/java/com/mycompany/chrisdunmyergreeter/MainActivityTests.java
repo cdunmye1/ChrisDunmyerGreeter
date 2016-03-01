@@ -1,10 +1,8 @@
 package com.mycompany.chrisdunmyergreeter;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
 
-/**
- * Created by Chris on 3/1/2016.
- */
 public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActivity> {
 
     public MainActivityTests() {
@@ -14,5 +12,22 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
     public void testActivityExists() {
         MainActivity activity = getActivity();
         assertNotNull(activity);
+    }
+
+    public void testGreet() {
+        MainActivity activity = getActivity();
+
+        // type name in text input
+        final EditText nameEditText =
+                (EditText) activity.findViewById(R.id.greet_edit_text);
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                nameEditText.requestFocus();
+            }
+        });
+
+        getInstrumentation().waitForIdleSync();
+        getInstrumentation().sendStringSync("Jake");
     }
 }
