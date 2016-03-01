@@ -18,26 +18,7 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
     }
 
     public void testGreet() {
-        MainActivity activity = getActivity();
-
-        // type name in text input
-        final EditText nameEditText =
-                (EditText) activity.findViewById(R.id.greet_edit_text);
-        getInstrumentation().runOnMainSync(new Runnable() {
-            @Override
-            public void run() {
-                nameEditText.requestFocus();
-            }
-        });
-
-        getInstrumentation().waitForIdleSync();
-        getInstrumentation().sendStringSync("Jake");
-
-        // test "Greet" button
-        Button greetButton =
-                (Button) activity.findViewById(R.id.greet_button);
-
-        TouchUtils.clickView(this, greetButton);
+        MainActivity activity = this.passStringAndPressGreet(getActivity());
 
         // validate name shows up in TextView
         TextView greetMessage =
@@ -65,8 +46,21 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
     }
 
     public void testReverseAfterGreetButtonPressed() {
-        MainActivity activity = getActivity();
+        MainActivity activity = this.passStringAndPressGreet(getActivity());
 
+        //press Reverse
+        Button reverseButton = (Button) activity.findViewById(R.id.reverse_button);
+        TouchUtils.clickView(this, reverseButton);
+
+        // validate reverse name shows up in TextView
+        TextView greetMessage =
+                (TextView) activity.findViewById(R.id.message_text_view);
+
+        String actualText = greetMessage.getText().toString();
+        assertEquals("!ekaJ ,olleH", actualText);
+    }
+
+    private MainActivity passStringAndPressGreet(MainActivity activity) {
         // type name in text input
         final EditText nameEditText =
                 (EditText) activity.findViewById(R.id.greet_edit_text);
@@ -84,16 +78,6 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
         Button greetButton =
                 (Button) activity.findViewById(R.id.greet_button);
         TouchUtils.clickView(this, greetButton);
-
-        //press Reverse
-        Button reverseButton = (Button) activity.findViewById(R.id.reverse_button);
-        TouchUtils.clickView(this, reverseButton);
-
-        // validate reverse name shows up in TextView
-        TextView greetMessage =
-                (TextView) activity.findViewById(R.id.message_text_view);
-
-        String actualText = greetMessage.getText().toString();
-        assertEquals("!ekaJ ,olleH", actualText);
+        return activity;
     }
 }
