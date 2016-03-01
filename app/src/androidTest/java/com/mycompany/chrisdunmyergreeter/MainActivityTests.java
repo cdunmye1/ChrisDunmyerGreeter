@@ -46,4 +46,13 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
         String actualText = greetMessage.getText().toString();
         assertEquals("Hello, Jake!", actualText);
     }
+
+    public void testReverseButtonIsDisabledByDefault() {
+        MainActivity activity = getActivity();
+
+        // test "Greet" button
+        Button reverseButton =
+                (Button) activity.findViewById(R.id.reverse_button);
+        assertEquals(false, reverseButton.isEnabled());
+    }
 }
