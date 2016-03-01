@@ -1,6 +1,8 @@
 package com.mycompany.chrisdunmyergreeter;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.TouchUtils;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActivity> {
@@ -29,5 +31,11 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 
         getInstrumentation().waitForIdleSync();
         getInstrumentation().sendStringSync("Jake");
+
+        // test "Greet" button
+        Button greetButton =
+                (Button) activity.findViewById(R.id.greet_button);
+
+        TouchUtils.clickView(this, greetButton);
     }
 }

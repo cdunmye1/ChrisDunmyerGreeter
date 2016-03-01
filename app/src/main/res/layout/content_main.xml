@@ -18,4 +18,12 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:inputType="textCapSentences"/>
+
+    <Button
+        android:id="@+id/greet_button"
+        android:text="@string/greet_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/greet_edit_text"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
